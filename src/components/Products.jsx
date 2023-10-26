@@ -6,9 +6,10 @@ export default function Products() {
   const {isLoading, error, data:products} = useQuery({
     queryKey:['products', checked],
     queryFn:async () => {
-      console.log("fetching...");
+      console.log("fetching...", checked);
       return fetch(`data/${checked ? 'sale_' : ''}products.json`).then((res) => res.json());
     },
+    staleTime: 5000,
   })
 
   const handleChange = () => setChecked((prev) => !prev);
